@@ -1,0 +1,12 @@
+body {
+  /* background-color: rgb(0, 0, 0); */
+  margin: 0;
+}
+
+.game-container {
+  border: 3px solid red;
+  width: fit-content;
+  /* pach <div id="game-container">  iwli wa5ad nafs display dyal div li da5l dyalo */
+  margin: auto;
+
+}
