@@ -3,11 +3,11 @@ import Style from '../styles/canvas.module.css'
 import { Bacasime_Antique } from 'next/font/google';
 const FPS = 1000 / 60
 const PLAYER_HEIGHT = 100
-const PLAYER_WIDTH = 20
-const BALL_START_SPEED = 0.2
+const PLAYER_WIDTH = 10
+const BALL_START_SPEED = 2
 const RADIUS = 10
-const VELOCITY = 25
-const LEVEL = 1
+const VELOCITY = 1
+const LEVEL = 0.05
 let canvas;
 let ctx;
 let net;
@@ -31,7 +31,7 @@ function defineClass(canvas) {
         score: 0
     }
     computer = {
-        x: canvas.width - player.width,
+        x: canvas.width - PLAYER_WIDTH,
         y: canvas.height / 2 - PLAYER_HEIGHT / 2,
         height: PLAYER_HEIGHT,
         width: PLAYER_WIDTH,
@@ -84,7 +84,8 @@ export default function progGame() {
         setInterval(game, FPS);
     })
     const handelsetMouseXY = (event) => {
-        player.y = event.clientY - player.height / 2 - 5
+        if (event.clientY - player.height / 2 + 5 > 0 && event.clientY + player.height / 2 < canvas.height + 10)
+            player.y = event.clientY - player.height / 2 - 5
         // console.log(`x = ${event.clientX}`)
         // console.log(`y = ${event.clientY}`)
     }
@@ -122,70 +123,73 @@ function collision(b, p) {
         b.right > p.left && b.bottom > p.top && b.left < p.right && b.top < p.bottom
     )
 }
+function countPoints() {
+    if (ball.left <= 1) {
+        computer.score += 1
+        ball.x = canvas.width / 2
+        ball.y = canvas.height / 2
+        player.y = canvas.height / 2 - player.height / 2
+        ball.speed = BALL_START_SPEED
+        ball.velocityX = VELOCITY
+        ball.velocityY = VELOCITY
+        // computer.score /= 5
+    }
+    else if (ball.right >= canvas.width) {
+        player.score += 1
+        ball.x = canvas.width / 2
+        ball.y = canvas.height / 2
+        player.y = canvas.height / 2 - player.height / 2
+        ball.speed = BALL_START_SPEED
+        ball.velocityX = VELOCITY
+        ball.velocityY = VELOCITY
+    }
+}
+
 function update() {
-    ball.x += ball.velocityX * ball.speed
-    ball.y += ball.velocityY * ball.speed
-
-    if (ball.y > canvas.height - ball.radius) {
+    ball.x += (ball.velocityX)
+    ball.y += (ball.velocityY)
+    computer.y += (ball.y - (computer.height / 2 + computer.y)) * LEVEL
+    if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
         ball.velocityY *= -1
     }
-    if (ball.y < 0 + ball.radius) {
-        ball.velocityY *= -1
-    }
-    let selectPlayer = ball.x < canvas.width / 2 ? player : computer
+    let selectPlayer = (ball.x < canvas.width / 2) ? player : computer
     if (collision(ball, selectPlayer)) {
-        ball.velocityX = - VELOCITY
-    }
-    // if (ball.x + ball.radius > canvas.width - computer.width) {
-    //     ball.velocityX *= - 1
-    // }
-    // if (ball.x + ball.radius > canvas.width - computer.width && (ball.y > computer.y && ball.y < computer.y + computer.height)) {
+        // if (ball.x < canvas.width / 2) {
+        //     //part of player
+        //     let option = computer.y + computer.height / 2 > canvas.height / 2 ? 100 : -100
 
-    //     ball.velocityX *= -1
-    // }
-    // if (ball.x > canvas.width - ball.radius) {
-    //     ball.velocityX *= -1
-    // }
-    if (ball.x < 0 + ball.radius) {
-        ball.velocityX *= -1
+        //     let Whencollesion = ball.y - ((computer.y) + computer.height / 2)
+        //     if (Whencollesion > -15 && Whencollesion < 15)
+        //         Whencollesion = ball.y - ((computer.y + option) + computer.height / 2)
+        //     Whencollesion = (Whencollesion / computer.height) / 2
+        //     let angle = Whencollesion * (Math.PI / 4)
+        //     ball.velocityX = ball.speed * Math.cos(angle)
+        //     ball.velocityY = ball.speed * Math.sin(angle)
+        //     ball.speed += 0.2
+        //     console.log(angle)
+
+        // }
+        // else {
+        //part of computer
+        let x = ball.klsdfj
+        let Whencollesion = ball.y - (selectPlayer.y + (selectPlayer.height / 2));
+        // console.log(Whencollesion)
+        // let Whenc = Whencollesion / selectPlayer.height / 2;
+        Whencollesion = Whencollesion / (selectPlayer.height / 2);
+        // console.log((Whenc));
+        // console.log(Whenc1);
+        // console.log("---------------\n")
+        let angle = Whencollesion * (Math.PI / 4);
+        let direction = (ball.x < canvas.width / 2) ? 1 : -1;
+        ball.velocityX = direction * ball.speed * Math.cos(angle);
+        ball.velocityY = ball.speed * Math.sin(angle);
+        ball.speed += 0.05;
+        // }
     }
-    computer.y = computer.y + (ball.y - computer.height / 2 - computer.y) * LEVEL
-    // a + (b - a) * t
+    countPoints()
+
 }
 function game() {
     update()
     render()
 }
-
-// import React, { useState } from 'react';
-
-// const ColorChangingDiv = () => {
-//     // State variable to store the current color
-//     const [backgroundColor, setBackgroundColor] = useState('blue');
-
-//     // Event handler for mouse enter event
-//     const handleMouseEnter = () => {
-//         setBackgroundColor('red');
-//     };
-
-//     // Event handler for mouse leave event
-//     const handleMouseLeave = () => {
-//         setBackgroundColor('blue');
-//     };
-
-//     return (
-//         <div
-//             style={{
-//                 width: '200px',
-//                 height: '200px',
-//                 backgroundColor: backgroundColor,
-//             }}
-//             onMouseEnter={handleMouseEnter}
-//             onMouseLeave={handleMouseLeave}
-//         >
-//             Move your mouse over this div to change its color.
-//         </div>
-//     );
-// };
-
-// export default ColorChangingDiv;
