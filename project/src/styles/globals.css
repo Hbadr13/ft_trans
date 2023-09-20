@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary-color: 0, 0, 0;
+  --primary-colorr: 214, 219, 220;
+  --primary-colorrr: 255, 255, 255;
+}
+
+.carcontainer {
+  @apply bg-red-900;
+}
