@@ -97,6 +97,7 @@ int main(int ac, char **argv)
     FD_SET(sockfd, &groupRead);
     maxfd = sockfd;
     id = 0;
+
     while (1)
     {
         copyRread = groupRead;
@@ -166,3 +167,20 @@ int main(int ac, char **argv)
         }
     }
 }
+
+// {
+//     "tabnine.experimentalAutoImports": true,
+//     "files.autoSave": "afterDelay",
+//     "workbench.colorTheme": "Monokai Pro (Filter Spectrum)",
+//     "workbench.iconTheme": "vscode-icons",
+//     "editor.fontFamily": "JetBrains Mono",
+//     "terminal.integrated.fontFamily": "monospace",
+//     "editor.fontSize": 15,
+//     "terminal.integrated.defaultProfile.linux": "zsh",
+//     "editor.minimap.enabled": false,
+//     "window.zoomLevel": 2,
+//     "editor.formatOnSave": true,
+//     "workbench.settings.applyToAllProfiles": [
+//         "terminal.integrated.commandsToSkipShell"
+//     ]
+// }

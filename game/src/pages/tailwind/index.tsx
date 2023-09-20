@@ -45,6 +45,7 @@ function Addsection() {
             <p className='leading-0 text-sm'>This `browsh` text-based browser is so. amazingly. good. This is what the elders expected `lynx` to become</p>
         </div>)
 }
+
 function Footer() {
     return (
         <footer className='  bg-slate-700 '>
@@ -93,7 +94,7 @@ function Section2() {
             <div className="container mx-auto px-8 my-32 text-center">
                 <h2 className='text-center font-blod text-4xl'> Application Programming Interface</h2>
                 <p className='mt-8 max-w-5xl mx-auto'>
-                    "API" stands for Application Programming Interface. It is a set of rules and protocols that allows different software applications to communicate with each other. APIs are used to enable the integration of different systems or services, allowing them to work together and share data.
+                    `API` stands for Application Programming Interface. It is a set of rules and protocols that allows different software applications to communicate with each other. APIs are used to enable the integration of different systems or services, allowing them to work together and share data.
                 </p>
                 <div className='flex mt-10  flex-col space-y-5 md:space-y-0 md:flex-row md:space-x-10'>
                     <Addsection></Addsection>
@@ -107,7 +108,7 @@ function Section2() {
 import { useEffect } from 'react';
 
 
-export default function index1() {
+export default function Index1() {
     useEffect(() => {
         const mobileBtn = document.querySelector("#mobile-btn");
         const mobileMtn = document.querySelector("#mobile-menu");
