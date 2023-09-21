@@ -5,3 +5,10 @@ export interface CustomLinkNavbarProps {
   content?: string;
   moreStye?: string;
 }
+
+export interface BoxSearchrProps {
+  searchUser: string;
+  setSearchUser: (searchUser: string) => void;
+  hiddenSearch: boolean;
+  setHiddenSearch: (hiddenSearch: boolean) => void;
+}

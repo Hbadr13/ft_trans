@@ -1,40 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 style="colore:blue">Header Section:</h1>
 
-## Getting Started
+<h1 style="colore:blue">header</h1>
+navbar
+topbar
+header-nav
+header-section
+Hero Section:
 
-First, run the development server:
+<h1 style="colore:blue">hero</h1>
+banner
+intro
+main-banner
+About Section:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<h1 style="colore:blue">about</h1>
+about-us
+about-section
+Services Section:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<h1 style="colore:blue">services</h1>
+services-offered
+what-we-do
+offerings
+Features Section:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+<h1 style="colore:blue">features</h1>
+product-features
+feature-list
+Portfolio Section:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+<h1 style="colore:blue">portfolio</h1>
+projects
+work
+Testimonials Section:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<h1 style="colore:blue">testimonials</h1>
+client-feedback
+what-people-say
+Team Section:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<h1 style="colore:blue">team</h1>
+our-team
+meet-the-team
+Contact Section:
 
-## Learn More
+<h1 style="colore:blue">contact</h1>
+contact-us
+get-in-touch
+contact-form
+Footer Section:
 
-To learn more about Next.js, take a look at the following resources:
+<h1 style="colore:blue">footer</h1>
+site-footer
+bottom-section
+FAQ Section:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<h1 style="colore:blue">scribe Section:</h1>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+subscribe
+newsletter
+Gallery Section:
 
-## Deploy on Vercel
+<h1 style="colore:blue">gallery</h1>
+image-gallery
+Map Section:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<h1 style="colore:blue">form</h1>
+contact-form
+inquiry-form
+Error Section (For 404 pages or error messages):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<h1 style="colore:blue">error</h1>
+not-found
