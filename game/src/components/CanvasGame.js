@@ -63,6 +63,7 @@ function drawCircle(x, y, r, color) {
     ctx.closePath();
     ctx.fill()
 }
+
 function drawNet() {
     for (var i = 0; i < net.height; i += 15) {
         drawRect(net.x, net.y + i, 4, 10, "green")
@@ -74,6 +75,7 @@ function drawRect(x, y, w, h, color) {
     ctx.fillStyle = color
     ctx.fillRect(x, y, w, h)
 }
+
 export default function progGame() {
     const reff = useRef(null);
     const [mouseXY, setMouseXY] = useState({ x: 0, y: 0 })
@@ -84,10 +86,9 @@ export default function progGame() {
         setInterval(game, FPS);
     })
     const handelsetMouseXY = (event) => {
+        console.log(event.clientX, ' - ', event.clientY)
         if (event.clientY - player.height / 2 + 5 > 0 && event.clientY + player.height / 2 < canvas.height + 10)
             player.y = event.clientY - player.height / 2 - 5
-        // console.log(`x = ${event.clientX}`)
-        // console.log(`y = ${event.clientY}`)
     }
     return (
         <>
@@ -132,7 +133,7 @@ function countPoints() {
         ball.speed = BALL_START_SPEED
         ball.velocityX = VELOCITY
         ball.velocityY = VELOCITY
-        // computer.score /= 5
+
     }
     else if (ball.right >= canvas.width) {
         player.score += 1
@@ -154,37 +155,13 @@ function update() {
     }
     let selectPlayer = (ball.x < canvas.width / 2) ? player : computer
     if (collision(ball, selectPlayer)) {
-        // if (ball.x < canvas.width / 2) {
-        //     //part of player
-        //     let option = computer.y + computer.height / 2 > canvas.height / 2 ? 100 : -100
-
-        //     let Whencollesion = ball.y - ((computer.y) + computer.height / 2)
-        //     if (Whencollesion > -15 && Whencollesion < 15)
-        //         Whencollesion = ball.y - ((computer.y + option) + computer.height / 2)
-        //     Whencollesion = (Whencollesion / computer.height) / 2
-        //     let angle = Whencollesion * (Math.PI / 4)
-        //     ball.velocityX = ball.speed * Math.cos(angle)
-        //     ball.velocityY = ball.speed * Math.sin(angle)
-        //     ball.speed += 0.2
-        //     console.log(angle)
-
-        // }
-        // else {
-        //part of computer
-        let x = ball.klsdfj
         let Whencollesion = ball.y - (selectPlayer.y + (selectPlayer.height / 2));
-        // console.log(Whencollesion)
-        // let Whenc = Whencollesion / selectPlayer.height / 2;
         Whencollesion = Whencollesion / (selectPlayer.height / 2);
-        // console.log((Whenc));
-        // console.log(Whenc1);
-        // console.log("---------------\n")
         let angle = Whencollesion * (Math.PI / 4);
         let direction = (ball.x < canvas.width / 2) ? 1 : -1;
         ball.velocityX = direction * ball.speed * Math.cos(angle);
         ball.velocityY = ball.speed * Math.sin(angle);
         ball.speed += 0.05;
-        // }
     }
     countPoints()
 

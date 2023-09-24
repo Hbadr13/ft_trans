@@ -9,6 +9,4 @@ export interface CustomLinkNavbarProps {
 export interface BoxSearchrProps {
   searchUser: string;
   setSearchUser: (searchUser: string) => void;
-  hiddenSearch: boolean;
-  setHiddenSearch: (hiddenSearch: boolean) => void;
 }
