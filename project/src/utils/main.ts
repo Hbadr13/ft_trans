@@ -1,21 +1,26 @@
 import React, { useEffect, useRef, useState, RefObject } from 'react'
-import { Player, Canvas } from './class'
+import { Player, Canvas, Ball } from './class'
 
-let player = new Player(0, 0)
-const updateGameLoop = (mousePosition: { x: number, y: number }) => {
+
+
+const updateGameLoop = (mousePosition: { x: number, y: number }, ball: Ball, player: Player, computer: Player) => {
     player.y = mousePosition.y
+    ball.x += 1
 }
-const renderGameOverScreen = () => {
 
-}
-export function startGame(myCanvasRef: React.RefObject<HTMLCanvasElement>, mousePosition: { x: number, y: number }) {
+const renderGameOverScreen = (myCanvasRef: React.RefObject<HTMLCanvasElement>, ball: Ball, player: Player, computer: Player) => {
     if (!myCanvasRef.current) return
     const canvas = new Canvas(myCanvasRef.current)
-    if (!canvas.cnx) return
-    updateGameLoop(mousePosition)
-    renderGameOverScreen()
+    if (!canvas.ctx) return
     canvas.ClearCanvas()
-    canvas.drawRect({ x: 0, y: player.y })
+    canvas.drawRect({ x: player.x, y: player.y })
+    canvas.drawRect({ x: computer.x, y: computer.y })
+    canvas.drawCircle(ball)
+}
+
+export function startGame(myCanvasRef: React.RefObject<HTMLCanvasElement>, mousePosition: { x: number, y: number }, ball: Ball, player: Player, computer: Player) {
+    updateGameLoop(mousePosition, ball, player, computer)
+    renderGameOverScreen(myCanvasRef, ball, player, computer)
 }
 
 
