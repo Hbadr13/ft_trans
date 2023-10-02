@@ -17,6 +17,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/pong.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/pong.tsx", "src/pages/api/socket.js", "src/pages/chat.tsx"],
   "exclude": ["node_modules"]
 }

@@ -97,7 +97,7 @@ const Navbar = () => {
                 <div className="w-[20%] hidden  sm:flex flex-row item-center justify-between text-[#1ba098]">
                     <CustomLinkNavbar moreStye="" href="/" content="Home" />
                     <CustomLinkNavbar moreStye="" href="/" content="Chat" />
-                    <CustomLinkNavbar moreStye="" href="/pong" content="PongGame" />
+                    <CustomLinkNavbar moreStye="" href="/game" content="PongGame" />
                 </div>
                 <div className="flex item-center justify-center sm:w-[60%] w-[100%] py-4 ">
                     <BoxSearch searchUser={searchUser} setSearchUser={setSearchUser} />
@@ -111,7 +111,6 @@ const Navbar = () => {
 
         </>
     )
-
 }
 
 export default Navbar;
