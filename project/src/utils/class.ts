@@ -1,5 +1,5 @@
 export class Player {
-  name: string;
+  name: string = "";
   x: number = 0;
   y: number = 0;
   width: number = 10;
@@ -9,6 +9,7 @@ export class Player {
   bottom: number = 0;
   right: number = 0;
   left: number = 0;
+  score: number = 0;
   public constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
@@ -72,10 +73,12 @@ export const GameInfo = {
   PLAYER_Y: 0,
   BALL_START_SPEED: 2,
   RADIUS_BALL: 10,
-  VELOCIT: 0.5,
+  VELOCIT: 0.3,
   LEVEL: 0.05,
   ANGLE: Math.PI / 4,
-  SPEED: 2,
+  SPEED: 3,
+  CANVAS_WIDTH: 0,
+  CANVAS_HIEGHT: 0,
 };
 
 export class Canvas {
@@ -95,6 +98,11 @@ export class Canvas {
     this.ctx.fillStyle = "#000000";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
+  // public Clear(): void {
+  // if (!this.ctx) return;
+  // this.ctx.fillStyle = "#000000";
+  // this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+  // }
   public drawRect(object: Player): void {
     if (!this.ctx) return;
     this.ctx.fillStyle = "#FFFFFF";
@@ -135,7 +143,7 @@ export class Canvas {
       let newAngle = GameInfo.ANGLE * whenCollision;
       ball.velocityX = direction * GameInfo.SPEED * Math.cos(newAngle);
       ball.velocityY = GameInfo.SPEED * Math.sin(newAngle);
-      GameInfo.SPEED += 0.1;
+      // GameInfo.SPEED += 0.1;
     }
   }
 }

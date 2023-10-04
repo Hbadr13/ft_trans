@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, RefObject } from "react";
 import { Player, Canvas, Ball, GameInfo } from "./class";
+import { InfoGameFromClientProps } from "@/components/model";
 
 //lerp
 function LinearInterpolation(pos1: number, pos2: number, t: number) {
@@ -11,18 +12,23 @@ const updateGameLoop = (
   mousePosition: { x: number; y: number },
   ball: Ball,
   player: Player,
-  computer: Player
+  computer: Player,
+  infoGameFromClient: InfoGameFromClientProps
 ) => {
-  // computer.y = computer.y + (ball.y - computer.height / 2 - computer.y) * 1;
-  computer.y = LinearInterpolation(
-    computer.y,
-    ball.y - computer.height / 2,
-    0.1
-  );
-  // computer.y = ball.y - computer.height / 2;
-  // computer.y += ball.y - 20;
-
+  //init the canvas size in Gameinfo
+  GameInfo.CANVAS_WIDTH = MyCanvas.width;
+  GameInfo.CANVAS_HIEGHT = MyCanvas.height;
+  if (infoGameFromClient.selectPlayer === "computer")
+    computer.y = LinearInterpolation(
+      computer.y,
+      ball.y - computer.height / 2,
+      0.1
+    );
+  else {
+    computer.y = mousePosition.x;
+  }
   player.y = mousePosition.y;
+  // computer.y = mousePosition.y;
   ball.x += ball.velocityX;
   ball.y += ball.velocityY;
 
@@ -32,6 +38,7 @@ const updateGameLoop = (
   if (ball.bottom > MyCanvas.height || ball.top < 0) ball.velocityY *= -1;
   let selectPlayer = ball.x < MyCanvas.width / 2 ? player : computer;
   if (ball.checkCollision(selectPlayer)) MyCanvas.moveBall(ball, selectPlayer);
+  if (ball.x < 0) computer.score++;
 };
 
 const renderGameOverScreen = (
@@ -52,11 +59,19 @@ export function startGame(
   mousePosition: { x: number; y: number },
   ball: Ball,
   player: Player,
-  computer: Player
+  computer: Player,
+  infoGameFromClient: InfoGameFromClientProps
 ) {
   if (!myCanvasRef.current) return;
   const MyCanvas = new Canvas(myCanvasRef.current);
-  updateGameLoop(MyCanvas, mousePosition, ball, player, computer);
+  updateGameLoop(
+    MyCanvas,
+    mousePosition,
+    ball,
+    player,
+    computer,
+    infoGameFromClient
+  );
   renderGameOverScreen(MyCanvas, ball, player, computer);
 }
 

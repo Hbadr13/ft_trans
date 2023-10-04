@@ -1,11 +1,13 @@
 import { off } from 'process';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Socket } from 'socket.io';
 import io from 'socket.io-client';
 
 
 function Chat() {
-  const [socket, setsocket] = useState<Socket>()
+  // const myref = useRef<any>()
+  const [socket, setsocket] = useState<any>()
+  // var socket;
   const [messages, setMessages] = useState<string[]>([]);
   const [messageInput, setMessageInput] = useState('');
   const [rome, setrome] = useState('');
@@ -13,10 +15,7 @@ function Chat() {
   useEffect(() => {
     const newSocket = io('http://localhost:8001');
     setsocket(newSocket)
-    // socket.on('message', (data) => {
-    //   setMessages([...messages, data]);
-    // });
-  }, [setsocket]);
+  }, []);
 
   const sendMessage = () => {
     socket?.emit('message', messageInput);
@@ -26,7 +25,6 @@ function Chat() {
   const sendRome = () => {
     socket?.emit('rome', rome);
     console.log(rome)
-    // setMessageInput('');
   };
   const messgaeLister = (message: string) => {
     setMessages([...messages, message])
