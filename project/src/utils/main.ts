@@ -31,14 +31,32 @@ const updateGameLoop = (
   // computer.y = mousePosition.y;
   ball.x += ball.velocityX;
   ball.y += ball.velocityY;
-
+  // if (ball.x < 0) {
+  //   computer.score++;
+  // }
+  if (ball.x < 0) {
+    // console.log(score);
+    // setscore(score + 1);
+    computer.score += 1;
+    ball.x = GameInfo.CANVAS_WIDTH / 2;
+    ball.y = GameInfo.CANVAS_HIEGHT / 2;
+    ball.velocityX = GameInfo.VELOCIT;
+    ball.velocityY = GameInfo.VELOCIT;
+  }
+  // setscore(player.score)
+  if (ball.x > GameInfo.CANVAS_WIDTH) {
+    player.score += 1;
+    ball.x = GameInfo.CANVAS_WIDTH / 2;
+    ball.y = GameInfo.CANVAS_HIEGHT / 2;
+    ball.velocityX = GameInfo.VELOCIT;
+    ball.velocityY = GameInfo.VELOCIT;
+  }
   ball.setBorder();
   player.setBorder();
   computer.setBorder();
   if (ball.bottom > MyCanvas.height || ball.top < 0) ball.velocityY *= -1;
   let selectPlayer = ball.x < MyCanvas.width / 2 ? player : computer;
   if (ball.checkCollision(selectPlayer)) MyCanvas.moveBall(ball, selectPlayer);
-  if (ball.x < 0) computer.score++;
 };
 
 const renderGameOverScreen = (
@@ -52,6 +70,9 @@ const renderGameOverScreen = (
   MyCanvas.drawRect(computer);
   MyCanvas.drawMedianLine({ w: 2, h: 10, step: 20, color: "#FFFFFF" });
   MyCanvas.drawCircle(ball);
+
+  MyCanvas.drawText(String(computer.score), 200, 200, "white");
+  MyCanvas.drawText(String(player.score), 800, 200, "white");
 };
 
 export function startGame(

@@ -20,25 +20,17 @@ const Pong = (props: InfoGame) => {
     const [socket, setsocket] = useState<any>()
     const [numberPlayer, setnumberPlayer] = useState(0)
     const [HoAreYou, setHoAreYou] = useState(0)
-
+    const [score, setscore] = useState(0)
+    if (props.infoGameFromClient.selectPlayer === 'online') {
+        GameInfo.SPEED = 2
+        ball.velocityX = 1.2
+        ball.velocityY = 1.2
+        console.log('hello hello')
+    }
     useEffect(() => {
         socket?.on('start', () => {
             setnumberPlayer(2)
             setInterval(() => {
-                // if (ball.x < 0) {
-                //     computer.score++;
-                //     ball.x = GameInfo.CANVAS_WIDTH / 2
-                //     ball.y = GameInfo.CANVAS_HIEGHT / 2
-                //     ball.velocityX = GameInfo.VELOCIT
-                //     ball.velocityY = GameInfo.VELOCIT
-                // }
-                // if (ball.x > GameInfo.CANVAS_WIDTH) {
-                //     player.score++;
-                //     ball.x = GameInfo.CANVAS_WIDTH / 2
-                //     ball.y = GameInfo.CANVAS_HIEGHT / 2
-                //     ball.velocityX = GameInfo.VELOCIT
-                //     ball.velocityY = GameInfo.VELOCIT
-                // }
                 startGame(myCanvasRef, mousePosition, ball, player, computer, props.infoGameFromClient)
 
 
@@ -50,7 +42,7 @@ const Pong = (props: InfoGame) => {
                     if (HoAreYou == 1) {
                         socket?.emit('update2', computer.y);
                     }
-                    socket?.emit('moveBall', { x: ball.x, y: ball.y })
+                    socket?.emit('moveBall', { x: ball.x, y: ball.y, playerScore: player.score, computerScore: computer.score })
                     socket?.on('y1', (yy: number) => {
                         if (HoAreYou == 1)
                             mousePosition.y = yy
@@ -63,6 +55,8 @@ const Pong = (props: InfoGame) => {
                         if (HoAreYou == 1) {
                             ball.x = obj.x
                             ball.y = obj.y
+                            console.log(computer.score)
+                            computer.score = obj.computerScore
                         }
                     })
                 }
@@ -75,8 +69,6 @@ const Pong = (props: InfoGame) => {
             mousePosition.y = (e.clientY - rect.top) - 25
         if (HoAreYou == 1)
             mousePosition.x = (e.clientY - rect.top) - 25
-        // console.log(mousePosition.y)
-        // setScore(mousePosition.y)
     };
     useEffect(() => {
         const handlerResize = () => {
@@ -106,7 +98,7 @@ const Pong = (props: InfoGame) => {
         });
     },)
     useEffect(() => {
-        const newSocket = io('http://localhost:8002');
+        const newSocket = io('http://localhost:8000');
         setsocket(newSocket)
         return () => {
             newSocket.disconnect();
@@ -155,7 +147,7 @@ const Pong = (props: InfoGame) => {
                                 </div>
                                 <div className='bg-slate-400 w-[40%] h-[90%] rounded-2xl flex justify-center items-center text-3xl'>
                                     {
-                                        mousePosition.y
+                                        score
                                     }
                                 </div>
                             </div>

@@ -76,7 +76,7 @@ export const GameInfo = {
   VELOCIT: 0.3,
   LEVEL: 0.05,
   ANGLE: Math.PI / 4,
-  SPEED: 3,
+  SPEED: 0.5,
   CANVAS_WIDTH: 0,
   CANVAS_HIEGHT: 0,
 };
@@ -116,6 +116,14 @@ export class Canvas {
     this.ctx.closePath();
     this.ctx.fill();
   }
+
+  public drawText(text: string, x: number, y: number, color: string) {
+    if (!this.ctx) return;
+    this.ctx.fillStyle = color;
+    this.ctx.font = "40px fantasy";
+    this.ctx.fillText(text, x, y);
+  }
+
   public drawMedianLine(lineInfo: {
     w: number;
     h: number;

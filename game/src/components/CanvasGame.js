@@ -73,15 +73,20 @@ function drawRect(x, y, w, h, color) {
   ctx.fillRect(x, y, w, h);
 }
 
-export default function progGame() {
-  const reff = useRef(null);
+export default function ProgGame() {
   const [mouseXY, setMouseXY] = useState({ x: 0, y: 0 });
+  const [flag, setflag] = useState(0);
+
+  const reff = useRef(null);
   useEffect((s) => {
     canvas = reff.current;
     ctx = canvas.getContext("2d");
-    defineClass(canvas);
+    if (flag == 0) {
+      defineClass(canvas);
+      setflag(1);
+    }
     setInterval(game, FPS);
-  });
+  },[flag, setflag]);
   const handelsetMouseXY = (event) => {
     console.log(event.clientX, " - ", event.clientY);
     if (
@@ -89,6 +94,7 @@ export default function progGame() {
       event.clientY + player.height / 2 < canvas.height + 10
     )
       player.y = event.clientY - player.height / 2 - 5;
+    setMouseXY({ x: player.y, y: player.y });
   };
   return (
     <>
@@ -160,7 +166,6 @@ function collision(ball, p) {
   return (
     ball.right > p.left &&
     ball.left < p.right &&
-
     ball.bottom > p.top &&
     ball.top < p.bottom
   );
