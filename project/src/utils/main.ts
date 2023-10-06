@@ -13,9 +13,15 @@ const updateGameLoop = (
   ball: Ball,
   player: Player,
   computer: Player,
-  infoGameFromClient: InfoGameFromClientProps
+  infoGameFromClient: InfoGameFromClientProps,
+  HoAreYou: number
 ) => {
   //init the canvas size in Gameinfo
+  if (computer.status == 'Resume' || computer.status == 'Resume')
+    return
+  // console.log('computer.status :',computer.status)
+  // console.log('player.status :',player.status)
+
   GameInfo.CANVAS_WIDTH = MyCanvas.width;
   GameInfo.CANVAS_HIEGHT = MyCanvas.height;
   if (infoGameFromClient.selectPlayer === "computer")
@@ -27,30 +33,12 @@ const updateGameLoop = (
   else {
     computer.y = mousePosition.x;
   }
-  player.y = mousePosition.y;
-  // computer.y = mousePosition.y;
+  if (mousePosition.y > -10 && (mousePosition.y + player.height < MyCanvas.height + 10))
+    player.y = mousePosition.y;
+  if (HoAreYou == 1)
+    return
   ball.x += ball.velocityX;
   ball.y += ball.velocityY;
-  // if (ball.x < 0) {
-  //   computer.score++;
-  // }
-  if (ball.x < 0) {
-    // console.log(score);
-    // setscore(score + 1);
-    computer.score += 1;
-    ball.x = GameInfo.CANVAS_WIDTH / 2;
-    ball.y = GameInfo.CANVAS_HIEGHT / 2;
-    ball.velocityX = GameInfo.VELOCIT;
-    ball.velocityY = GameInfo.VELOCIT;
-  }
-  // setscore(player.score)
-  if (ball.x > GameInfo.CANVAS_WIDTH) {
-    player.score += 1;
-    ball.x = GameInfo.CANVAS_WIDTH / 2;
-    ball.y = GameInfo.CANVAS_HIEGHT / 2;
-    ball.velocityX = GameInfo.VELOCIT;
-    ball.velocityY = GameInfo.VELOCIT;
-  }
   ball.setBorder();
   player.setBorder();
   computer.setBorder();
@@ -71,8 +59,8 @@ const renderGameOverScreen = (
   MyCanvas.drawMedianLine({ w: 2, h: 10, step: 20, color: "#FFFFFF" });
   MyCanvas.drawCircle(ball);
 
-  MyCanvas.drawText(String(computer.score), 200, 200, "white");
-  MyCanvas.drawText(String(player.score), 800, 200, "white");
+  MyCanvas.drawText(String(player.score), 300, 60, "white");
+  MyCanvas.drawText(String(computer.score), 700, 60, "white");
 };
 
 export function startGame(
@@ -81,18 +69,12 @@ export function startGame(
   ball: Ball,
   player: Player,
   computer: Player,
-  infoGameFromClient: InfoGameFromClientProps
+  infoGameFromClient: InfoGameFromClientProps,
+  HoAreYou: number
 ) {
   if (!myCanvasRef.current) return;
   const MyCanvas = new Canvas(myCanvasRef.current);
-  updateGameLoop(
-    MyCanvas,
-    mousePosition,
-    ball,
-    player,
-    computer,
-    infoGameFromClient
-  );
+  updateGameLoop(MyCanvas, mousePosition, ball, player, computer, infoGameFromClient, HoAreYou);
   renderGameOverScreen(MyCanvas, ball, player, computer);
 }
 

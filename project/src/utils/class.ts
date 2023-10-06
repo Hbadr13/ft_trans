@@ -10,6 +10,7 @@ export class Player {
   right: number = 0;
   left: number = 0;
   score: number = 0;
+  status: string = 'Pause';
   public constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
@@ -79,6 +80,7 @@ export const GameInfo = {
   SPEED: 0.5,
   CANVAS_WIDTH: 0,
   CANVAS_HIEGHT: 0,
+  you:-1
 };
 
 export class Canvas {

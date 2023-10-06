@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, RefObject } from 'react'
 
-import Pong from './game'
+import Pong from '../../components/game'
 
 const Index = () => {
     const [selectPlayer, setselectPlayer] = useState('')
@@ -24,10 +24,10 @@ const Index = () => {
                                 </button>
                                 <button className="rounded-2xl w-[20%] h-[200px] bg-black text-yellow-600 font-extralight text-4xl hover:bg-gray-800"
                                     // value="player"
-                                    onClick={() => setselectPlayer("ofline")}
+                                    onClick={() => setselectPlayer("offline")}
                                 >
                                     <span>play with friend </span>
-                                    <span className='text-2xl'>ofline</span>
+                                    <span className='text-2xl'>offline</span>
 
                                 </button>
                                 <button className="rounded-2xl w-[20%] h-[200px] bg-black text-yellow-600 font-extralight text-4xl hover:bg-gray-800"

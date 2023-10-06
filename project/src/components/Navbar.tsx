@@ -49,7 +49,7 @@ const BoxSearch = ({ searchUser, setSearchUser }: BoxSearchrProps) => {
                         </Combobox.Input>
                         <Image src='/search.svg' className='absolute left-2' alt='search' width={20} height={20}></Image>
                         <Combobox.Button className='absolute right-3'>
-                            <Image src='/arrow-up.svg' className=' ' alt='search' width={20} height={20}></Image>
+                            <Image src='/arrow-up.svg' className='w-[auto] ' alt='search' width={20} height={20}></Image>
                         </Combobox.Button>
                     </div>
                     <Combobox.Options className='absolute flex justify-center mt-5 w-[50%]'>
